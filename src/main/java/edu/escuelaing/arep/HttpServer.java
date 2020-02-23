@@ -55,6 +55,9 @@ public class HttpServer {
                             .println(inputLine.indexOf("/") + " " + inputLine.indexOf(" ", inputLine.indexOf(" ") + 1));
                     archivo = inputLine.substring(inputLine.indexOf("/") + 1,
                             inputLine.indexOf(" ", inputLine.indexOf(" ") + 1));
+                    if (archivo.length() == 0) {
+                        archivo = "index.html";
+                    }
                     break;
                 }
             }

@@ -44,7 +44,7 @@ public class AppTest {
         String res;
 
         try {
-            out.println("GET /alert \n");
+            out.println("GET /lobo \n");
             res = in.readLine();
             assertTrue(res.contains("200"));
 
