@@ -18,12 +18,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class HttpServer {
-
-    public HttpServer(){
-        
-    }
+    private static WebServer webServer = new WebServer();
 
     public static void main(String[] args) throws IOException {
+
+        webServer.genRutas();
         int port = getPort();
         ServerSocket serverSocket = null;
         while (true) {
@@ -60,14 +59,21 @@ public class HttpServer {
                 }
             }
 
-            String[] pathType = getType(archivo);
+            if (webServer.exist("/" + archivo)) {
+                String ruta = "/" + archivo;
+                String res = "HTTP/1.1 200 OK\r\n" + "Content-Type: text/html\r\n" + "\r\n"
+                        + webServer.getContenido(ruta);
+                out.println(res);
 
-            if (pathType[1] == "html") {
-                getFile(pathType[0], out);
-            } else if (pathType[1] == "img") {
-                getImg(pathType[0], clientSocket.getOutputStream());
+            } else {
+                String[] pathType = getType(archivo);
+                if (pathType[1] == "html" || pathType[1] == "js") {
+                    getFile(pathType[0], out);
+                } else if (pathType[1] == "img") {
+                    getImg(pathType[0], clientSocket.getOutputStream());
+                }
+
             }
-
             // outputLine = "HTTP/1.1 200 OK\r\n" + "Content-Type: text/html\r\n" + "\r\n" +
             // getFile(path);
 
