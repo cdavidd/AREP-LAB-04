@@ -20,6 +20,12 @@ import java.awt.image.BufferedImage;
 public class HttpServer {
     private static WebServer webServer = new WebServer();
 
+    /**
+     * Inicia el servidor
+     * 
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         webServer.genRutas();
@@ -88,6 +94,11 @@ public class HttpServer {
         }
     }
 
+    /**
+     * 
+     * @param file archivo
+     * @return retorna el path y el tipo del archivo
+     */
     private static String[] getType(String file) {
         String path = "src/main/resources/";
         String[] res = new String[2];
@@ -107,6 +118,11 @@ public class HttpServer {
         return res;
     }
 
+    /**
+     * 
+     * @param path path del recurso
+     * @param out  salida en pantalla
+     */
     private static void getFile(String path, PrintWriter out) {
         File archivo = new File(path);
         String temp, outputLine = "HTTP/1.1 200 OK\r\n" + "Content-Type: text/html\r\n" + "\r\n";
@@ -130,6 +146,11 @@ public class HttpServer {
         out.println(outputLine);
     }
 
+    /**
+     * 
+     * @param path         String del path a buscar
+     * @param clientOutput salida en pantalla
+     */
     private static void getImg(String path, OutputStream clientOutput) {
         try {
             BufferedImage image = ImageIO.read(new File(path));
@@ -144,6 +165,11 @@ public class HttpServer {
 
     }
 
+    /**
+     * Retorna el puerto
+     * 
+     * @return int
+     */
     static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));

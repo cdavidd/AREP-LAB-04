@@ -13,12 +13,12 @@ import edu.escuelaing.arep.annotations.Web;
 public class WebServer {
 
     /**
-     * 
+     * se encarga de guardar la ruta /ejemplo y el metodo q esta retorna
      */
     private HashMap<String, Method> rutas = new HashMap<>();
 
     /**
-     * 
+     * Inserta en el Hashmap las rutas con el tag @web
      */
     public void genRutas() {
         String className = "edu.escuelaing.arep.model.WebService";
@@ -46,9 +46,10 @@ public class WebServer {
     }
 
     /**
+     * Mira si existe la ruta en el hashmap
      * 
      * @param ruta
-     * @return
+     * @return si existe o no
      */
     public boolean exist(String ruta) {
         return rutas.containsKey(ruta);
@@ -56,6 +57,7 @@ public class WebServer {
     }
 
     /**
+     * Retorna el contenido de la ruta
      * 
      * @param ruta
      * @return
